@@ -1,5 +1,5 @@
 const elastic = require("../elastic");
-const quotes  = require(`./quotes.json`);
+const quotes = require(`./quotes.json`);
 
 /**
  * @function createESAction
@@ -10,9 +10,10 @@ const quotes  = require(`./quotes.json`);
 
 const esAction = {
   index: {
-    _index: elastic.index,
-    _type: elastic.type
-  }
+    _index: "test",
+    // _index: elastic.index,
+    // _type: elastic.type,
+  },
 };
 
 /**
@@ -21,7 +22,6 @@ const esAction = {
  */
 
 async function populateDatabase() {
-
   const docs = [];
 
   for (const quote of quotes) {
@@ -33,5 +33,13 @@ async function populateDatabase() {
 }
 
 module.exports = {
-  populateDatabase
+  populateDatabase,
 };
+
+if (require.main === module) {
+  (async () => {
+    await populateDatabase();
+
+    console.log("teswt");
+  })();
+}
